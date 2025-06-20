@@ -12,7 +12,7 @@ def call() {
             stage('Build Docker Image') {
                 steps {
                     script {
-                        echo "🔧 Building Docker image from Dockerfile..."
+                        echo "Building Docker image from Dockerfile..."
                         docker.build("simple-microservice")
                     }
                 }
@@ -21,7 +21,7 @@ def call() {
             stage('Run Container') {
                 steps {
                     script {
-                        echo "🚀 Running the app inside Docker container..."
+                        echo "Running the app inside Docker container..."
                         docker.image("simple-microservice").run()
                     }
                 }
@@ -30,7 +30,7 @@ def call() {
 
         post {
             success {
-                echo "✅ Build and run completed"
+                echo "Build and run completed"
             }
         }
     }
