@@ -9,28 +9,28 @@ def call() {
                 }
             }
 
-            stage('Build') {
+            stage('Build Docker Image') {
                 steps {
-                    echo "Building microservice..."
+                    script {
+                        echo "🔧 Building Docker image from Dockerfile..."
+                        docker.build("simple-microservice")
+                    }
                 }
             }
 
-            stage('Test') {
+            stage('Run Container') {
                 steps {
-                    echo "Running tests..."
-                }
-            }
-
-            stage('Deploy') {
-                steps {
-                    echo "Deploying microservice..."
+                    script {
+                        echo "🚀 Running the app inside Docker container..."
+                        docker.image("simple-microservice").run()
+                    }
                 }
             }
         }
 
         post {
             success {
-                echo "Pipeline completed successfully!"
+                echo "✅ Build and run completed"
             }
         }
     }
